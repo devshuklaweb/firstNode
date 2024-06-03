@@ -1,20 +1,40 @@
-//creating a basic api with static data
-const http = require("http");
-const data = require("./data");
-http.createServer((req,res)=>{
-    //create header and mention return type
-    res.writeHead(200,{'Content-Type':'application\json'});
-    res.write(JSON.stringify(data));
-    res.end();
-    console.log("start server on post: http://localhost:4000");
+//curd with file system (write,rename,read,delete files)
+const fs = require("fs");
+const path = require("path");
+const dirPath = path.join(__dirname,"curd");//for getting curd folder complete path.
+const fileName = `${dirPath}/filename.txt`;
 
-}).listen(4000);
+//create new files with content put
+    fs.writeFileSync(fileName,"this is my file content output");
 
-// after running url: http://localhost:4000/
-/* Resule:
-        {
-        "name": "Devendra",
-        "email": "dev@gmail.com",
-        "age": 22
+//for reading file content
+    /*
+    fs.readFile(fileName,'utf8',(error,filedata)=>{
+        console.log(filedata);
+    })
+    */
+
+//update content in a file
+    /*
+    fs.appendFile(fileName,' and this is my new content store in a file',(error)=> {
+        if(!error) {
+            console.log("File updated successfully");
+        } else {
+            console.log("Error: "+error);
         }
-*/
+    })
+    */
+
+//rename the filename.txt to fileNewname.txt
+    /*
+    fs.rename(fileName,`${dirPath}/fileNewname.txt`,(error)=> {
+        if(!error) {
+            console.log("File renamed successfully");
+        } else {
+            console.log("Error: "+error);
+        }
+    });
+    */
+
+//delete any files
+    //fs.unlinkSync(`${dirPath}/fileNewname.txt`);
